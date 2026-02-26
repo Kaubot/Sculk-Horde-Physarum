@@ -57,12 +57,10 @@ import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.world.scores.Scoreboard;
 
-public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntity { 
+public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntity {
 
-    
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    
     private boolean hasPlayedPlace = false;
     private int ageTicks = 0;
 
@@ -87,22 +85,15 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
         super(net.alekrus.shphysarum.Block.ModBlocks.SCULK_BEACON_BE.get(), pos, state);
     }
 
-    
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "beacon_controller", 3, event -> {
-
-            
             if (this.isRaidActive) {
                 return event.setAndContinue(RawAnimation.begin().thenLoop("work"));
             }
-
-            
             if (!this.hasPlayedPlace) {
                 return event.setAndContinue(RawAnimation.begin().thenPlay("place").thenLoop("idle"));
             }
-
-            
             return event.setAndContinue(RawAnimation.begin().thenLoop("idle"));
         }));
     }
@@ -116,9 +107,7 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
     public boolean isRaidActive() { return isRaidActive; }
     public UUID getInitiatorUUID() { return initiatiorUUID; }
 
-    
     public void startRaid(Player player) {
-        
         if (level.dimension() != Level.OVERWORLD) {
             if (!level.isClientSide) {
                 player.sendSystemMessage(Component.literal("§cSignal failed. The Sculk Beacon connection works only in the Overworld."));
@@ -137,7 +126,10 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
 
         if (!checkPlatformIntegrity(level, worldPosition)) {
             if (!level.isClientSide) {
-                player.sendSystemMessage(Component.literal("§cInvalid Terrain! You need a solid 40x40 platform beneath the beacon."));
+                
+                int currentRadius = ModClientConfig.BEACON_PLATFORM_RADIUS.get();
+                int size = currentRadius * 2;
+                player.sendSystemMessage(Component.literal("§cInvalid Terrain! You need a solid " + size + "x" + size + " platform beneath the beacon."));
                 level.playSound(null, worldPosition, SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS, 1.0f, 0.5f);
             }
             return;
@@ -161,9 +153,9 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
         }
     }
 
-    
     private boolean checkPlatformIntegrity(Level level, BlockPos center) {
-        int radius = 20;
+        
+        int radius = ModClientConfig.BEACON_PLATFORM_RADIUS.get();
         int yCheck = center.getY() - 1;
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
@@ -186,10 +178,6 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
             return;
         }
 
-        
-        
-        
-        
         if (!entity.hasPlayedPlace) {
             entity.ageTicks++;
             if (entity.ageTicks > 40) {
@@ -199,7 +187,6 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
             }
         }
 
-        
         if (!entity.isRaidActive) return;
 
         entity.raidTicker++;
@@ -286,7 +273,6 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
         }
     }
 
-    
     private static void handleClientMusic(SculkBeaconBlockEntity entity) {
         Player localPlayer = Minecraft.getInstance().player;
         if (localPlayer != null && entity.initiatiorUUID != null && localPlayer.getUUID().equals(entity.initiatiorUUID)) {
@@ -334,11 +320,18 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
             raidTeam.setColor(ChatFormatting.YELLOW);
         }
 
+        
+        int platformRadius = ModClientConfig.BEACON_PLATFORM_RADIUS.get();
+
         for (int i = 0; i < count; i++) {
             EntityType<?> typeToSpawn = calculateEnemyType(wave, sLevel.random);
 
             double angle = sLevel.random.nextDouble() * Math.PI * 2;
-            double dist = 18 + sLevel.random.nextDouble() * 2;
+
+            
+            double spawnBase = Math.max(3.0, platformRadius - 2.0);
+            double dist = spawnBase + sLevel.random.nextDouble() * 2;
+
             double x = center.getX() + Math.cos(angle) * dist;
             double z = center.getZ() + Math.sin(angle) * dist;
             int y = sLevel.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int)x, (int)z);
@@ -435,7 +428,6 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
             for (UUID uuid : raidMobs) {
                 Entity e = sLevel.getEntity(uuid);
                 if (e != null && e.isAlive()) {
-
                     sLevel.sendParticles(ParticleTypes.SCULK_SOUL, e.getX(), e.getY() + 1, e.getZ(), 20, 0.3, 0.3, 0.3, 0.1);
                     e.discard();
                 }
@@ -466,7 +458,6 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
                     GravemindMessagePacket.sendToPlayer(serverPlayer, "They're backing down");
                     GravemindMessagePacket.sendToPlayer(serverPlayer, "You did better than I expected.");
                 }
-
                 level.playSound(null, player.blockPosition(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.MASTER, 1f, 1f);
             }
         }
@@ -483,7 +474,6 @@ public class SculkBeaconBlockEntity extends BlockEntity implements GeoBlockEntit
 
     @Override public void setRemoved() { super.setRemoved(); raidBossBar.removeAllPlayers(); }
 
-    
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
