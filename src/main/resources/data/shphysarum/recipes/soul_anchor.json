@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "OCO",
+    "DDD"
+  ],
+  "key": {
+    "S": {
+      "item": "sculkhorde:soulite_shard"
+    },
+    "O": {
+      "item": "sculkhorde:infested_crying_obsidian"
+    },
+    "C": {
+      "item": "sculkhorde:crying_souls"
+    },
+    "D": {
+      "item": "sculkhorde:sculk_dura_matter"
+    }
+  },
+  "result": {
+    "item": "shphysarum:soul_anchor",
+    "count": 1
+  }
+}

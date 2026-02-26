@@ -1,0 +1,20 @@
+{
+  "item.shphysarum.sculk_apple": "Sculk Apple",
+  "item.shphysarum.rich_biomass_bark": "Rich Biomass Bark",
+  "block.shphysarum.soul_anchor": "Soul Anchor",
+  "block.shphysarum.sculk_beacon": "Sculk Beacon",
+  "item.shphysarum.sculk_witch_spawn_egg": "Skulkbane Witch Spawn Egg",
+  "item.shphysarum.mycelium_sprout": "Mycelium Sprout",
+  "item.shphysarum.mycelial_brain_scaffold": "Mycelial Brain Scaffold",
+  "item.shphysarum.nutrient_essence": "Nutrient Essence",
+
+
+  "creativetab.shphysarum_tab": "Sculk Horde: Physarum",
+
+  "key.categories.sculk_shphysarum": "Sculk Horde: Physarum",
+
+  "key.shphysarum.ability_menu": "Ability Selector (Hold)",
+  "key.shphysarum.ability_activate": "Use Selected Ability",
+  "key.shphysarum.sculk_move": "Command Sculk Mobs (Hold)",
+  "key.shphysarum.gravemind_menu": "Commune with Gravemind"
+}

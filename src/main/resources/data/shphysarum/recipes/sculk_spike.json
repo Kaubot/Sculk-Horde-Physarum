@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "CSC"
+  ],
+  "key": {
+    "C": {
+      "item": "sculkhorde:calcite_clump"
+    },
+    "S": {
+      "item": "minecraft:sculk"
+    }
+  },
+  "result": {
+    "item": "sculkhorde:spike",
+    "count": 1
+  }
+}

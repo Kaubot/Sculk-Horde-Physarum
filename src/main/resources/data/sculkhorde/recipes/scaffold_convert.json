@@ -1,0 +1,12 @@
+{
+  "type": "sculkhorde:soul_harvesting",
+  "ingredients": [
+    {
+      "item": "shphysarum:mycelial_brain_scaffold"
+    }
+  ],
+  "output": {
+    "item": "sculkhorde:sculk_node",
+    "count": 1
+  }
+}

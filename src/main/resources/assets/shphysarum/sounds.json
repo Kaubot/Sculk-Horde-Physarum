@@ -1,0 +1,12 @@
+{
+  "raid_music": {
+    "category": "record",
+    "subtitle": "subtitles.shphysarum.raid_music",
+    "sounds": [
+      {
+        "name": "shphysarum:fixing_the_threat",
+        "stream": true
+      }
+    ]
+  }
+}

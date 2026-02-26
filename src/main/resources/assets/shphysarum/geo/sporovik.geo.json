@@ -1,0 +1,59 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 8,
+				"visible_bounds_height": 5,
+				"visible_bounds_offset": [0, 0.5, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0],
+					"rotation": [0, 180, 0]
+				},
+				{
+					"name": "body_tumor1",
+					"parent": "root",
+					"pivot": [-3, 4, 6],
+					"cubes": [
+						{
+							"origin": [-9, 0, 0],
+							"size": [9, 2, 8],
+							"uv": {
+								"north": {"uv": [82, 117], "uv_size": [9, 2]},
+								"east": {"uv": [74, 117], "uv_size": [8, 2]},
+								"south": {"uv": [99, 117], "uv_size": [9, 2]},
+								"west": {"uv": [91, 117], "uv_size": [8, 2]},
+								"up": {"uv": [82, 109], "uv_size": [9, 8]},
+								"down": {"uv": [82, 117], "uv_size": [9, -8]}
+							}
+						}
+					]
+				},
+				{
+					"name": "body_tendril1",
+					"parent": "body_tumor1",
+					"pivot": [-5, 6, 6],
+					"rotation": [-20, 0, 0],
+					"cubes": [
+						{
+							"origin": [-12, 2, 0],
+							"size": [10, 10, 0],
+							"pivot": [-6, 7, 5],
+							"rotation": [37.5, -30, 0],
+							"uv": {
+								"north": {"uv": [2, 116], "uv_size": [10, 10]},
+								"south": {"uv": [12, 116], "uv_size": [-10, 10]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

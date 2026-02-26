@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "sculkhorde:block/soulite_block",
+    "bottom": "sculkhorde:block/sculk_dura_matter",
+    "side": "shphysarum:block/a10"
+  }
+}
